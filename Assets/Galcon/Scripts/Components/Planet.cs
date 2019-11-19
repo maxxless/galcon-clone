@@ -110,12 +110,12 @@ public class Planet : MonoBehaviour
         }
         else
         {
-            planesCount = (planesCount - 1) == 0 ? Conqueare() : planesCount - 1;
+            planesCount = (planesCount - 1) == 0 ? Conquer() : planesCount - 1;
         }
 
         UpdateCountText();
 
-        int Conqueare()
+        int Conquer()
         {
             if (from.isEnemyPlanet)
             {
