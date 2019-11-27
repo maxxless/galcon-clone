@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaneComponent : MonoBehaviour
+public class PlaneComponent : MonoBehaviour, IHasGameFrame
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float speed;
@@ -14,29 +14,11 @@ public class PlaneComponent : MonoBehaviour
     private float frameLength = 0.05f; //50 miliseconds
     private int FramesCount = 0;
 
-    private void Update()
+    public bool Finished {get; set;}
+
+    private void Start()
     {
-        if (home == null)
-            return;
-
-        ////// LOCKSTEP
-        if (FramesCount == 0)
-        {
-            MakeMove(frameLength);
-            FramesCount++;
-        }
-        else
-        {
-            accumilatedTime += Time.deltaTime;
-
-            while (accumilatedTime > frameLength)
-            {
-                MakeMove(frameLength);
-                accumilatedTime -= frameLength;
-                FramesCount++;
-            }
-        }
-        //////
+        SceneManager.Manager.GameFrameObjects.Add(this);
     }
 
     private void MakeMove(float t)
@@ -63,8 +45,15 @@ public class PlaneComponent : MonoBehaviour
             if (planet != null && Vector2.Distance(transform.position, target) < 2f && planet != home)
             {
                 planet.LandPlane(home);
+                SceneManager.Manager.GameFrameObjects.Remove(this);
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void GameFrameTurn(int gameFramesPerSecond)
+    {
+        // MakeMove((float)gameFramesPerSecond / 1000f);
+        MakeMove(frameLength);
     }
 }

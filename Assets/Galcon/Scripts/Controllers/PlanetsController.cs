@@ -116,7 +116,6 @@ public class PlanetsController : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient)
             return;
-
         int rndPlanetsCount = Random.Range(planetsCount.x, planetsCount.y + 1);
         bool isMyPlanets = true;
         bool isBigPlanet = true;

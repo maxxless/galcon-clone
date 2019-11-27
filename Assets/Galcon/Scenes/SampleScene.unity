@@ -1479,8 +1479,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2002849388}
-  - component: {fileID: 2002849389}
   - component: {fileID: 2002849390}
+  - component: {fileID: 2002849394}
+  - component: {fileID: 2002849393}
+  - component: {fileID: 2002849389}
   - component: {fileID: 2002849391}
   - component: {fileID: 2002849392}
   m_Layer: 0
@@ -1533,7 +1535,7 @@ MonoBehaviour:
   - {fileID: 291690723}
   - {fileID: 1218089781}
   - {fileID: 784594950}
-  planetsCount: {x: 3, y: 4}
+  planetsCount: {x: 3, y: 3}
   photonView: {fileID: 2002849391}
   winPanel: {fileID: 1959526696}
   winText: {fileID: 695182065}
@@ -1553,7 +1555,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectionButton: {fileID: 287422374}
   connectionText: {fileID: 579652302}
-  mainMenuPanel: {fileID: 1451506158}
 --- !u!114 &2002849391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1588,7 +1589,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4163b686b056a4695c74009f36ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFpsCount: 30
+  maxFpsCount: 60
+--- !u!114 &2002849393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002849387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a54c8945492c56499b98fdba3db31e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonView: {fileID: 2002849391}
+  mainMenuPanel: {fileID: 1451506158}
+  LockStepTurnID: 0
+  numberOfPlayers: 2
+--- !u!114 &2002849394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002849387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66eeaeb36f50bb34a810b084a3129e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2034970914
 GameObject:
   m_ObjectHideFlags: 0

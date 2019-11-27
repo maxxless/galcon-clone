@@ -11,7 +11,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Button connectionButton;
     [SerializeField] private TextMeshProUGUI connectionText;
-    [SerializeField] private GameObject mainMenuPanel;
 
     private void Awake()
     {
@@ -44,6 +43,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         connectionText.text = "Waiting players";
+        LockStepManager.Instance.PrepGameStart();
     }
 
     public override void OnConnectedToMaster()
@@ -53,18 +53,12 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions() { MaxPlayers = 2 }, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions() { MaxPlayers = 2, PublishUserId = true }, TypedLobby.Default);
         connectionButton.interactable = false;
         connectionText.text = "Connecting";
-
-        StartCoroutine(Wait(() =>
-        {
-            mainMenuPanel.SetActive(false);
-            PlanetsController.Instance.SpawnPlanets();
-        }));
     }
 
-    private IEnumerator Wait(Action callback = null)
+    private IEnumerator Wait(System.Action callback = null)
     {
         var waiter = new WaitForSeconds(.1f);
 

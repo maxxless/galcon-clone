@@ -103,8 +103,8 @@ MonoBehaviour:
   planesCount: 32
   planeInSeconds: 1
   spriteRenderer: {fileID: 1692092564927658020}
-  homeColor: {r: 0.1022568, g: 0.8962264, b: 0.080322154, a: 1}
-  enemyColor: {r: 1, g: 0, b: 0.0586915, a: 1}
+  homeColor: {r: 1, g: 0.4656816, b: 0, a: 1}
+  enemyColor: {r: 0.26606226, g: 0, b: 1, a: 1}
   countText: {fileID: 5318130742191803183}
   photonView: {fileID: 7015407472403662819}
   plane: {fileID: 6879166220530261832, guid: ecedfd8a6514bf0438f1a30e24861d4b, type: 3}

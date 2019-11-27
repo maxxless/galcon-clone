@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 
-public class Planet : MonoBehaviour
+public class Planet : MonoBehaviour, IHasGameFrame
 {
     [SerializeField] private bool isEnemyPlanet;
     [SerializeField] private bool isBigPlanet;
@@ -23,6 +23,8 @@ public class Planet : MonoBehaviour
     public Color HomeColor => homeColor;
     public SpriteRenderer SSpriteRenderer => spriteRenderer;
 
+    public bool Finished { get; set; }
+
     private float counter = 0f;
     private bool isInited = false;
 
@@ -35,30 +37,7 @@ public class Planet : MonoBehaviour
     {
         PlanetsController.Instance.InitPlanet(this);
         countText.enabled = false;
-    }
-
-    private void Update()
-    {
-        if (!PlanetsController.Instance.IsSpawned)
-            return;
-
-        ////// LOCKSTEP
-        if (FramesCount == 0)
-        {
-            CountIntervalForTextUpdate(frameLength);
-            FramesCount++;
-        }
-        else
-        {
-            accumilatedTime += Time.deltaTime;
-            while (accumilatedTime > frameLength)
-            {
-                CountIntervalForTextUpdate(frameLength);
-                accumilatedTime -= frameLength;
-                FramesCount++;
-            }
-        }
-        //////
+        SceneManager.Manager.GameFrameObjects.Add(this);
     }
 
     private void CountIntervalForTextUpdate(float t)
@@ -110,12 +89,12 @@ public class Planet : MonoBehaviour
         }
         else
         {
-            planesCount = (planesCount - 1) == 0 ? Conquer() : planesCount - 1;
+            planesCount = (planesCount - 1) == 0 ? Conqueare() : planesCount - 1;
         }
 
         UpdateCountText();
 
-        int Conquer()
+        int Conqueare()
         {
             if (from.isEnemyPlanet)
             {
@@ -177,5 +156,16 @@ public class Planet : MonoBehaviour
     public void HideCountText()
     {
         countText.enabled = false;
+    }
+
+    public void GameFrameTurn(int gameFramesPerSecond)
+    {
+        // CountIntervalForTextUpdate(gameFramesPerSecond / 100f);
+        CountIntervalForTextUpdate(frameLength);
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.Manager.GameFrameObjects.Remove(this);
     }
 }
